@@ -1,4 +1,4 @@
-# giscli
+# arcgis-cli (arcgis_cli)
 
 **🚧 Work in Progress (WIP) / Early Development 🚧**
 
