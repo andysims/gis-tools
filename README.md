@@ -4,10 +4,37 @@
 
 Collection of Python CLI tools for geospatial and GIS workflows.
 
-Early stage — expect frequent changes.
+Early stage — expect frequent changes, breaking changes, and rapid iteration.
 
 ## Current tool
 
 - **arcgis-cli**  
   Basic ArcGIS Online / Portal admin CLI  
   (user/group search, info, exports)
+
+## Planned Tools
+
+A list of tools I intend to build next (in no particular order).
+
+- **snow-cli**  
+  ServiceNow CLI — tickets, users, counts, exports
+  (Quickly list your incidents, search     users, create tickets, get group/user stats,   and export results)
+
+- **osm-gc**  
+  Quick OpenStreetMap geocoder  
+  (instead of using/relying on ESRI)
+
+- **gis-utils**
+      Simple tool for basic, but repetitive ops  
+  (epsg lookup, re-proj data, extent calculator, etc.)
+
+Contributions, ideas, or PRs for any of these (or completely new ones) are welcome — especially if you already have something working.
+
+## Contributing
+
+Just open an issue or PR.  
+No strict process yet — it's early.
+
+## License
+
+MIT
