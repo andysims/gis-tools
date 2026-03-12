@@ -1,0 +1,5 @@
+[project]
+name = "arcgis-cli"           # hyphen here
+
+[project.scripts]
+arcgis-cli = "arcgis_cli.cli:main"   # for import
