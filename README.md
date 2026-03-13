@@ -4,7 +4,7 @@
 
 Collection of Python CLI tools for geospatial and GIS workflows.
 
-Early stage — expect frequent changes, breaking changes, and rapid iteration.
+Early stage — expect frequent changes.
 
 ## Current tool
 
