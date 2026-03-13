@@ -3,8 +3,8 @@
 **🚧 Work in Progress (WIP) / Early Development 🚧**
 
 This is an early-stage personal/org tool for ArcGIS Online/Enterprise admin tasks.  
-Not production-ready yet — APIs, commands, and docs are changing frequently.  
-Feel free to watch/star for updates, but **please don't use it in real workflows until v1.0**.
+Not production-ready yet — commands and docs are changing frequently.  
+Feel free to watch/star for updates, but **please don't use it in real workflows**.
 
 Minimal command-line tool for common ArcGIS Online / ArcGIS Enterprise administration tasks.
 
