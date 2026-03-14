@@ -12,7 +12,7 @@ Early stage — expect frequent changes.
   Basic ArcGIS Online / Portal admin CLI  
   (user/group search, info, exports)
 
-- **gis-utils**
+- **gis-utils**  
   Simple tool for basic, but repetitive ops
   (epsg lookup, re-proj data, extent calculator, etc.)
 
