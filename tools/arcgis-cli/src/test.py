@@ -28,7 +28,7 @@ if __name__ == "__main__":
 
     print(yd())
 
-    my_env = load_env(source="portal")  # this would be passed in as args
+    my_env = load_env(source="agol")  # this would be passed in as args
     gis_conn = gis_connection(
         my_env.get("url"), my_env.get("username"), my_env.get("password")
     )
