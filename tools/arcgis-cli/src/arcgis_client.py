@@ -17,11 +17,6 @@ def gis_connection(org_url: str, username: str, password: str) -> GIS:
         )
         log.info(f"Successfully connected as {gis.users.me.username}")
         return gis
-    # except Exception as e:
-    #     log.error(f"ArcGIS authentication error: {e}")
-    #   raise GISConnectionError(f"Failed to connect to {org_url}") from e
-
     except Exception as e:
-        log.error(f"Unexpected error connecting to {org_url}: {e}")
+        log.error(f"Failed to connect to {org_url}: {e}")
         raise
-        # raise GISConnectionError(f"Unexpected connection failure to {org_url}") from e
