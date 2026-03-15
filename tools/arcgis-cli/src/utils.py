@@ -13,6 +13,25 @@ Example:
 
 from datetime import datetime
 import logging
+import argparse
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="ArcGIS Online / Portal CLI for Admin")
+
+    parser.add_argument("--verbose", action="store_true", help="Enable debug logging")
+
+    source_group = parser.add_mutually_exclusive_group(required=True)
+    source_group.add_argument(
+        "--portal", action="store_true", help="Flag searched ArcGIS Enterprise Portal"
+    )
+    source_group.add_argument(
+        "--agol", action="store_true", help="Flag searched ArcGIS Online"
+    )
+
+    parser.add_argument("--search-user", type=str, help="Search on username or email")
+
+    return parser.parse_args()
 
 
 def format_datetime(esri_ts: float | int, fmt_type: str = None) -> str:

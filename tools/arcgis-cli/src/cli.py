@@ -1,31 +1,54 @@
 import argparse
 import sys
 import logging
-
 from config import load_env
+
+import sys
+import os
+
+# Will re-work when installed as pckg
+# sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from reports import simple_user_print
+
+from arcgis_client import gis_connection
+from users import user_search
+from utils import parse_args
+
 log = logging.getLogger(__name__)
-
-
-def parse_args():
-    parser = argparse.ArgumentParser(description="ArcGIS Online / Portal CLI for Admin")
-
-    parser.add_argument("--verbose", action="store_true", help="Enable debug logging")
-
-    source_group = parser.add_mutually_exclusive_group(required=True)
-    source_group.add_argument("--portal", action="store_true", help="Flag searched ArcGIS Enterprise Portal")
-    source_group.add_argument("--agol", action="store_true", help="Flag searched ArcGIS Online")
-
-    return parser.parse_args()
 
 
 def main():
     args = parse_args()
-    
+
+    if args.verbose:
+        logging.getLogger().setLevel(logging.DEBUG)
+
+    # Establishing source
+    if args.agol:
+        gis_source = "AGOL"
     if args.portal:
-        load_env(source="portal")
-    elif args.agol:
-        load_env(source="agol")
+        gis_source = "PORTAL"
+
+    # Setup env
+    env = load_env(source=gis_source)
+    gis = gis_connection(
+        org_url=env.get("url"),
+        username=env.get("username"),
+        password=env.get("password"),
+    )
+
+    if args.search_user:
+        if args.agol:
+            user = user_search(gis=gis, identifier=args.search_user)
+            simple_user_print(user=user)
+        elif args.portal:
+            raise NotImplementedError("Portal support coming soon")
 
 
 if __name__ == "__main__":
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s | %(levelname)s | %(message)s",
+        datefmt="%Y-%m-%d %I:%M:%S %p",
+    )
     main()

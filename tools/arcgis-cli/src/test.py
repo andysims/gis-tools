@@ -1,7 +1,7 @@
 # from .utils import to_yyyymmdd
-from utils import to_yyyymmdd as yd
+from utils import to_yyyymmdd as yd, format_datetime
 from config import load_env
-from arcgis_client import gis_connection
+from arcgis_client import gis_connection, search_user
 import logging
 
 log = logging.getLogger(__name__)
@@ -28,7 +28,12 @@ if __name__ == "__main__":
 
     print(yd())
 
+    print(format_datetime(esri_ts=1636006161232))
+
     my_env = load_env(source="agol")  # this would be passed in as args
     gis_conn = gis_connection(
         my_env.get("url"), my_env.get("username"), my_env.get("password")
     )
+
+    t = search_user(gis=gis_conn, identifier="test")
+    print(t)
