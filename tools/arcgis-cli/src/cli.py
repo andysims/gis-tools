@@ -3,6 +3,13 @@ import sys
 import logging
 from config import load_env
 
+import sys
+import os
+
+# Will re-work when installed as pckg
+# sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from reports import simple_user_print
+
 from arcgis_client import gis_connection
 from users import user_search
 from utils import parse_args
@@ -16,28 +23,24 @@ def main():
     if args.verbose:
         logging.getLogger().setLevel(logging.DEBUG)
 
+    # Establishing source
     if args.agol:
         gis_source = "AGOL"
     if args.portal:
         gis_source = "PORTAL"
 
+    # Setup env
+    env = load_env(source=gis_source)
+    gis = gis_connection(
+        org_url=env.get("url"),
+        username=env.get("username"),
+        password=env.get("password"),
+    )
+
     if args.search_user:
         if args.agol:
-            env = load_env(source=gis_source)
-            gis = gis_connection(
-                org_url=env.get("url"),
-                username=env.get("username"),
-                password=env.get("password"),
-            )
             user = user_search(gis=gis, identifier=args.search_user)
-            if isinstance(user, list):
-                print(f"Multiple users found:")
-                for u in user:
-                    print(f"  - {u.fullName}: {u.email} ({u.username})")
-            elif user:
-                print(f"  - {user.fullName}: {user.email} ({user.username})")
-            else:
-                print("No user found.")
+            simple_user_print(user=user)
         elif args.portal:
             raise NotImplementedError("Portal support coming soon")
 
