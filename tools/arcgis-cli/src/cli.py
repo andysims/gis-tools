@@ -12,7 +12,8 @@ from reports import simple_user_print
 
 from arcgis_client import gis_connection
 from users import user_search
-from utils import parse_args
+from groups import get_group_details, group_search
+from utils import parse_args, format_datetime
 
 log = logging.getLogger(__name__)
 
@@ -41,6 +42,13 @@ def main():
         if args.agol:
             user = user_search(gis=gis, identifier=args.search_user)
             simple_user_print(user=user)
+        elif args.portal:
+            raise NotImplementedError("Portal support coming soon")
+
+    if args.search_group:
+        if args.agol:
+            group = group_search(gis=gis, identifier=args.search_group)
+            get_group_details(group=group)
         elif args.portal:
             raise NotImplementedError("Portal support coming soon")
 
