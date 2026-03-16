@@ -47,28 +47,3 @@ def group_search(gis: GIS, identifier: str) -> Group | None:
             log.info(f"Group: {selected.title}")
             return selected
         print(f"  Invalid choice, enter 1-{len(results)} or 'q'")
-
-
-def get_group_details(group):
-    group_members = group.get_members()
-
-    group_owner = group.owner
-    group_admins = group_members["admins"]
-    group_users = group_members["users"]  # get_users()
-
-    total_users = 1 + len(group_admins) + len(group_users)
-
-    item_count = len(group.content(max_items=-1))
-
-    group_info = {
-        "title": group.title,
-        "id": group.id,
-        "member_count": total_users,
-        "owner": group_owner,
-        "admins": group_admins,
-        "users": group_users,
-        "created": format_datetime(group.created),
-        "items": item_count,
-    }
-
-    return group_info
