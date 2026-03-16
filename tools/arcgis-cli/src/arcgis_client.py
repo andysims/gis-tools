@@ -11,9 +11,9 @@ def gis_connection(org_url: str, username: str, password: str) -> GIS:
     try:
         log.info(f"Attempting connection to: {org_url}")
         gis = GIS(
-            org_url=org_url,
-            username=username,
-            password=password,
+            org_url,
+            username,
+            password,
         )
         log.info(f"Successfully connected as {gis.users.me.username}")
         return gis

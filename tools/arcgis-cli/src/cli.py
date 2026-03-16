@@ -8,11 +8,12 @@ import os
 
 # Will re-work when installed as pckg
 # sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from reports import simple_user_print
+from reports import simple_user_print, get_group_details, print_group_details
 
 from arcgis_client import gis_connection
 from users import user_search
-from utils import parse_args
+from groups import group_search
+from utils import parse_args, format_datetime
 
 log = logging.getLogger(__name__)
 
@@ -38,11 +39,16 @@ def main():
     )
 
     if args.search_user:
-        if args.agol:
-            user = user_search(gis=gis, identifier=args.search_user)
+        user = user_search(gis=gis, identifier=args.search_user)
+        if user:
             simple_user_print(user=user)
-        elif args.portal:
-            raise NotImplementedError("Portal support coming soon")
+            # raise NotImplementedError("Portal support coming soon")
+
+    if args.search_group:
+        group = group_search(gis=gis, identifier=args.search_group)
+        if group:
+            group_details = get_group_details(group=group)
+            print_group_details(group_details)
 
 
 if __name__ == "__main__":

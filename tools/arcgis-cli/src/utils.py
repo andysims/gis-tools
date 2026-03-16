@@ -31,6 +31,8 @@ def parse_args():
 
     parser.add_argument("--search-user", type=str, help="Search on username or email")
 
+    parser.add_argument("--search-group", help="Seach on group name or id")
+
     return parser.parse_args()
 
 
