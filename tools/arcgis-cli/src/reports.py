@@ -7,3 +7,8 @@ def simple_user_print(user):
         print(f"  - {user.fullName}: {user.email} ({user.username})")
     else:
         print("No user found.")
+
+
+def simple_group_print(group):
+    print(f"{group.title} ({group.id})")
+    print(f"\t")
