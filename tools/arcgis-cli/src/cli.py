@@ -8,7 +8,12 @@ import os
 
 # Will re-work when installed as pckg
 # sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from reports import simple_user_print, get_group_details, print_group_details
+from reports import (
+    simple_user_print,
+    get_group_details,
+    print_group_details,
+    export_csv_report,
+)
 
 from arcgis_client import gis_connection
 from users import user_search
@@ -49,6 +54,8 @@ def main():
         if group:
             group_details = get_group_details(group=group)
             print_group_details(group_details)
+            if args.export_csv:
+                export_csv_report(group_details)
 
 
 if __name__ == "__main__":

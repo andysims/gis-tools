@@ -24,9 +24,13 @@ def user_search(gis: GIS, identifier: str) -> User | None:
     else:
         results = gis.users.search(query=f"{identifier}", max_users=100)
 
+    if not results:
+        log.warning(f"User not found based on search: {identifier}")
+        return None
+
     if len(results) > 1:
+        log.info(f"Multiple users found: {len(results)}")
         return results
     elif len(results) == 1:
+        log.info(f"User found: {results[0].get('fullName')}")
         return results[0]
-
-    return None

@@ -33,6 +33,10 @@ def parse_args():
 
     parser.add_argument("--search-group", help="Seach on group name or id")
 
+    parser.add_argument(
+        "--export-csv", action="store_true", help="Export list[dict] to CSV"
+    )
+
     return parser.parse_args()
 
 
