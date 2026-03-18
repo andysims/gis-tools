@@ -1,9 +1,12 @@
 from arcgis.gis import Group, User
+from requests import head
 from utils import format_datetime
 from pathlib import Path
 from collections import OrderedDict
 import logging
+from typing import Any
 import pprint
+import csv
 
 log = logging.getLogger(__name__)
 
@@ -128,5 +131,27 @@ def print_group_details(group: dict):
             print(f"\t- {user}")
 
 
-def export_csv_report(user_info: dict) -> Path:
-    pass
+def export_csv_report(user_info: dict):
+    if dict is None:
+        log.warning(f"Nothing to export: Empty data {user_info}")
+
+    try:
+        downloads = Path.home() / "Downloads"
+        file = downloads / "test.csv"
+
+        headers = {}
+        for rec in user_info.keys():
+            for k, v in rec:
+                headers[k] = None
+        header_list = list(headers.keys())
+        print(header_list)
+
+        with file.open(mode='w', newline='', encoding='utf-8') as f_obj:
+            writer = csv.DictWriter(f_obj, fieldnames=header_list, restval='', extrasaction='ignore')
+            writer.writeheader()
+            writer.writerows(user_info)
+
+        log.info(file)
+    except Exception as e:
+        log.error('Did not work')
+        print(e)
