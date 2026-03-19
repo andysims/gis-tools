@@ -22,7 +22,7 @@ def user_search(gis: GIS, identifier: str) -> User | None:
     if "@" in identifier:
         results = gis.users.search(query=f"email:{identifier}", max_users=100)
     else:
-        results = gis.users.search(query=f"{identifier}", max_users=100)
+        results = gis.users.search(query=f"username:{identifier}", max_users=100)
 
     if not results:
         log.warning(f"User not found based on search: {identifier}")

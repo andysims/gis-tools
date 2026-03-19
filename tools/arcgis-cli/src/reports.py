@@ -131,9 +131,14 @@ def print_group_details(group: dict):
             print(f"\t- {user}")
 
 
-def export_csv_report(user_info: dict):
+def export_csv_report(user_info: dict | list) -> Path | None:
+    if not isinstance(user_info, (dict, list)):
+        log.warning(f"Must provide dict or list, not {type(user_info).__name__}")
+        return None
+
     if dict is None:
         log.warning(f"Nothing to export: Empty data {user_info}")
+        return None
 
     try:
         downloads = Path.home() / "Downloads"
